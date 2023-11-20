@@ -36,7 +36,7 @@ class _ChartPageState extends State<ChartPage> {
   bool _reconnecting = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // late Stream stream;
-  late Future<WebSocket> webSocket;
+  late WebSocketChannel webSocket;
   @override
   void initState() {
     super.initState();
@@ -115,8 +115,9 @@ class _ChartPageState extends State<ChartPage> {
   void connect() {
     if (!_reconnecting) {
       _reconnecting = true;
-      webSocket = WebSocket.connect("ws://localhost:8080",
-          headers: {"sdfasd": "dfasd"});
+      webSocket = WebSocketChannel.connect(Uri.parse(
+        "ws://localhost:8080",
+      ));
 
       // webSocket = WebSocket.connect(
       //   "ws://localhost:8080",
